@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: savia-kaniko
+  namespace: rer-sanita-laemur
+spec:
+  containers:
+    - name: savia-kaniko
+      image: gcr.io/kaniko-project/executor:debug
+      args: ["--skip-tls-verify", "--single-snapshot", "--context=git://github.com/mantmarco/savia-test-container", "--destination=core-harbor.stg.margherita.ad.lepida.it/savia-test/savia-test-repo"]
+      volumeMounts:
+        - name: savia-harbor-secret
+          mountPath: /kaniko/.docker
+      resources:
+        limits:
+          memory: 50Gi
+          cpu: 16000m
+        requests:
+          memory: 8Gi
+          cpu: 4000m
+  restartPolicy: Never
+  volumes:
+    - name: savia-harbor-secret
+      secret:
+        secretName: savia-harbor-secret-config-json
+  metadata:
+    namespace: rer-sanita-laemur
+  runtimeClassName: nvidia
