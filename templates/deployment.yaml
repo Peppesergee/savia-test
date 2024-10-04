@@ -1,28 +1,27 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: savia-rer-sanita-laemur
-  labels:
-    app: savia-rer-sanita-laemur
+  namespace: rer-sanita-laemur
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: savia-rer-sanita-laemur
-  template:
-    metadata:
-      labels:
-        app: savia-rer-sanita-laemur
-    spec:
-      containers:
-        - name: savia-rer-sanita-laemur
-          image: nvidia/cuda:12.6.1-devel-ubuntu24.04
-          imagePullPolicy: IfNotPresent
-          command: ["/bin/sleep"]
-          args: ["infinity"]
-          workingDir: "/"
-          ports:
-            - containerPort: 8000
-          resources:
-            limits:
-              nvidia.com/gpu: 1 # requesting 1 GPU
+  containers:
+    - command: ["/bin/sh","-c"]
+      args: ["mkdir /rer_app; cd /rer_app/; git init; git remote add origin https://github.com/mantmarco/savia-test.git; git branch -M main; git pull origin main; cd /rer_venv; . bin/activate; pip install -r /rer_app/requirements.txt; sleep infinity"]
+      image: core-harbor.stg.margherita.ad.lepida.it/savia-test/savia-test-repo
+      imagePullPolicy: IfNotPresent
+      name: savia-rer-sanita-laemur
+      securityContext:
+        privileged: true
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      resources:
+        limits:
+          nvidia.com/gpu: 1
+          memory: 30Gi
+          cpu: "16"
+        requests:
+          memory: 8Gi
+          cpu: "8"
+  metadata:
+    namespace: rer-sanita-laemur
+  runtimeClassName: nvidia
