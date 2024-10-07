@@ -54,11 +54,24 @@ while True:
   
     start_time = time.time()
 
+    tokenizer_start_time = time.time()
     prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    tokenizer_end_time = time.time()
+    print(f" tokenizer: {tokenizer_end_time - tokenizer_start_time}")
+
+    inputtokenizer_start_time = time.time()
     inputs = tokenizer(prompt, return_tensors="pt", add_special_tokens=False)
+    inputtokenizer_end_time = time.time()
+    print(f"input tokenizer: {inputtokenizer_end_time - inputtokenizer_start_time}")
+
     for k,v in inputs.items():
         inputs[k] = v.cuda()
+
+    generate_start_time = time.time()
     outputs = model.generate(**inputs, max_new_tokens=512, do_sample=True, top_p=0.9, temperature=0.6)
+    generatetokenizer_end_time = time.time()
+    print(f"generate time: {generatetokenizer_end_time - generate_start_time}")
+
     sequences = tokenizer.batch_decode(outputs)
     
     end_time = time.time()
