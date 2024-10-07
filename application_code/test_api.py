@@ -24,6 +24,7 @@ def initialize_model():
             base_model,
             quantization_config=bnb_config,
             device_map="auto",  # "auto" usa la GPU se disponibile
+            torch_dtype=torch.float16, # test
         )
         tokenizer = AutoTokenizer.from_pretrained(base_model)
         print("Modello caricato correttamente.")
@@ -42,7 +43,7 @@ pipe = transformers.pipeline(
     tokenizer=tokenizer,
     return_full_text=False,
     task='text-generation',
-    max_new_tokens=512,
+    max_new_tokens=512, # si può ridurre per velocizzare, risposte più brevi
     temperature=0.6,
     do_sample=True,
     top_p=0.9,
