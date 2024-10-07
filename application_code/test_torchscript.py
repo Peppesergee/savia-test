@@ -1,6 +1,7 @@
 import time
 import torch
 from transformers import AutoTokenizer
+from transformers import AutoModelForCausalLM
 from torch import cuda
 
 base_model = "swap-uniba/LLaMAntino-3-ANITA-8B-Inst-DPO-ITA"
