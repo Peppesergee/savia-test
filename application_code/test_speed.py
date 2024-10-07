@@ -68,7 +68,7 @@ while True:
     # Generazione ottimizzata: riduzione max_new_tokens e temperature più alta
     outputs = model.generate(
         **inputs,
-        max_new_tokens=512,  # Limita la lunghezza generata
+        max_new_tokens=3000,  # Limita la lunghezza generata
         temperature=0.7,  # Un po' più alta per generare più velocemente
         top_p=0.9,
         num_beams=1,
