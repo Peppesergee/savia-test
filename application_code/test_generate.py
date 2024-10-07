@@ -78,6 +78,6 @@ while True:
 
     response_time = end_time - start_time
     for seq in sequences:
-        print(f"Risposta: {seq['generated_text']}")
+        print(f"Risposta: {seq}")
     
     print(f"Tempo di risposta: {response_time:.2f} secondi\n")
