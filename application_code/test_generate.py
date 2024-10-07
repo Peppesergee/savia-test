@@ -24,9 +24,15 @@ def initialize_model():
             base_model,
             quantization_config=bnb_config,
             device_map="auto",  # "auto" usa la GPU se disponibile
+            attn_implementation="eager",
             # torch_dtype=torch.bfloat16, # test
         )
-        tokenizer = AutoTokenizer.from_pretrained(base_model)
+        tokenizer = AutoTokenizer.from_pretrained(
+            base_model, 
+            token = "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"
+        )
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.add_bos_token = False
         print("Modello caricato correttamente.")
     else:
         print("Modello già caricato, utilizzo quello esistente.")
@@ -68,7 +74,18 @@ while True:
         inputs[k] = v.cuda()
 
     generate_start_time = time.time()
-    outputs = model.generate(**inputs, max_new_tokens=512, do_sample=True, top_p=0.9, temperature=0.6)
+    outputs = model.generate(
+        **inputs, 
+        streamer = None,
+        pad_token_id = tokenizer.pad_token_id,
+        eos_token_id = tokenizer.eos_token_id,
+        max_new_tokens=512,
+        do_sample=False,
+        top_p=None,
+        num_beams = 1,
+        max_new_tokens = 3000,
+        temperature=0.6)
+
     generatetokenizer_end_time = time.time()
     print(f"generate time: {generatetokenizer_end_time - generate_start_time}")
 
