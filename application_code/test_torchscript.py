@@ -6,10 +6,13 @@ from torch import cuda
 base_model = "swap-uniba/LLaMAntino-3-ANITA-8B-Inst-DPO-ITA"
 
 def load_scripted_model(base_model):
-    model = torch.load(f"{base_model}.pt").to('cuda')
+    # Carica il modello preaddestrato da Hugging Face
+    model = AutoModelForCausalLM.from_pretrained(base_model).to('cuda')
 
+    # Esegui lo scripting del modello
     scripted_model = torch.jit.script(model)
-
+    
+    # Salva il modello ottimizzato (opzionale)
     torch.jit.save(scripted_model, f"{base_model}_scripted.pt")
 
     return scripted_model
