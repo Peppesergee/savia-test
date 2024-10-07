@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
     - command: ["/bin/sh","-c"]
-      args: ["mkdir /rer_app; cd /rer_app/; git init; git remote add origin https://github.com/Peppesergee/savia-test.git; git branch -M main; git pull origin main; cd /rer_venv; . bin/activate; pip install -r /rer_app/requirements.txt; sleep infinity"]
+      args: ["           mkdir /rer_app; cd /rer_app/; git init; git remote add origin https://github.com/Peppesergee/savia-test.git;            git branch -M main; git pull origin main; cd /rer_venv; . bin/activate; pip install -r /rer_app/requirements.txt; while true; do echo ''; sleep 60; done"]
       image: core-harbor.stg.margherita.ad.lepida.it/savia-test/savia-test-repo
       imagePullPolicy: IfNotPresent
       name: savia-rer-sanita-laemur
