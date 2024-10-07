@@ -24,7 +24,7 @@ def initialize_model():
             base_model,
             quantization_config=bnb_config,
             device_map="auto",  # "auto" usa la GPU se disponibile
-            torch_dtype=torch.float16, # test
+            torch_dtype=torch.bfloat16, # test
         )
         tokenizer = AutoTokenizer.from_pretrained(base_model)
         print("Modello caricato correttamente.")
