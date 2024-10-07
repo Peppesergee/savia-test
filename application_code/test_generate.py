@@ -82,7 +82,7 @@ while True:
         do_sample=False,
         top_p=None,
         num_beams = 1,
-        max_new_tokens = 3000,
+        max_new_tokens = 512,
         temperature=0.6)
 
     generatetokenizer_end_time = time.time()
