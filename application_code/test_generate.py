@@ -79,7 +79,6 @@ while True:
         streamer = None,
         pad_token_id = tokenizer.pad_token_id,
         eos_token_id = tokenizer.eos_token_id,
-        max_new_tokens=512,
         do_sample=False,
         top_p=None,
         num_beams = 1,
