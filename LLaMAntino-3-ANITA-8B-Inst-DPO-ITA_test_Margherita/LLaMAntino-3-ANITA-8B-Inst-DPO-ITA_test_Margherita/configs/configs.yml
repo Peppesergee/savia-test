@@ -1,0 +1,35 @@
+version: 2.1
+
+dataset:
+  dataset_folder: "../../../../datasets/instruction_datasets/instruction_dataset_v2"
+training:
+#  checkpoints_folder: "/leonardo_scratch/large/userinternal/gguidi00/checkpoints/LLaMAntino-3-ANITA-8B-Inst-DPO-ITA/"
+  checkpoints_folder: "/AI4AL_LLMFT/checkpoints/LLaMAntino-3-ANITA-8B-Inst-DPO-ITA/"
+  qlora_folder: "qlora_test_8"
+  load_model:
+    pretrained_model: "swap-uniba/LLaMAntino-3-ANITA-8B-Inst-DPO-ITA"
+    restore_qlora_weights: True
+  warmup_steps: 10
+  max_steps: 5000
+  eval_steps: 500
+  save_steps: 500
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  load_best_model_at_end: False
+  early_stopping:
+      use_early_stopping: False
+      patience: 3
+  optimizer:
+    optim: "paged_adamw_8bit"
+    learning_rate: "2e-5"   
+    weight_decay: 0.01
+    fp16: True
+  loss:
+    ignore_prompt: False
+  logging:
+    logging_steps: 1
+    use_tensorboard: True
+inference:
+  max_new_tokens: 700
+device:
+  device_name: "auto"
