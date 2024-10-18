@@ -65,7 +65,6 @@ while True:
   
     outputs = model.generate(
         **inputs, 
-        streamer = None,
         pad_token_id = tokenizer.pad_token_id,
         eos_token_id = tokenizer.eos_token_id,
         do_sample=True,
