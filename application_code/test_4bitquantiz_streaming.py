@@ -64,9 +64,6 @@ def generate_response_streaming(prompt):
     for i in range(len(output_ids.sequences[0])):
         # Decodifica solo il nuovo token
         new_token = tokenizer.decode(output_ids.sequences[0][i], skip_special_tokens=True)
-        if new_token in prompt:
-            filtered_token = ''.join([char for char in new_token if char not in prompt])
-            new_token = filtered_token
         generated_text += new_token
         print(new_token, end="", flush=True)  # Stampa progressivamente i nuovi token
         time.sleep(0.05)  # Aggiungi un leggero ritardo per simulare lo streaming
