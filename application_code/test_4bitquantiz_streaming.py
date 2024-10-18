@@ -47,7 +47,7 @@ def generate_response_streaming(prompt):
     top_p = 0.8  
     
     # Genera token per token
-    output = model.generate(
+    output_ids = model.generate(
         input_ids, 
         max_new_tokens=max_new_tokens, 
         temperature=temperature, 
@@ -59,13 +59,13 @@ def generate_response_streaming(prompt):
         return_dict_in_generate=True,
     )
     
-    # Trova la lunghezza dell'input per evitare di decodificare il prompt
-    input_length = input_ids.shape[1]
-    
-    # Decodifica solo i token generati
+    # Decodifica i token man mano e mostralo in tempo reale
     generated_text = ""
-    for i in range(input_length, len(output.sequences[0])):  # Ignora i token del prompt
-        new_token = tokenizer.decode(output.sequences[0][i], skip_special_tokens=True)
+    for i in range(len(output_ids.sequences[0])):
+        # Decodifica solo il nuovo token
+        new_token = tokenizer.decode(output_ids.sequences[0][i], skip_special_tokens=True)
+        if new_token in prompt:
+            continue
         generated_text += new_token
         print(new_token, end="", flush=True)  # Stampa progressivamente i nuovi token
         time.sleep(0.05)  # Aggiungi un leggero ritardo per simulare lo streaming
