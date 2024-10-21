@@ -93,7 +93,6 @@ while True:
     first_char_time = streamer.first_token_time
     if first_char_time:
         time_to_first_char = first_char_time - start_time
-        print(f"Tempo prima del primo carattere: {time_to_first_char:.2f} secondi")
 
     sequences = tokenizer.batch_decode(outputs)
 
@@ -103,4 +102,4 @@ while True:
     for seq in sequences:
         print(f"Risposta: {seq}")
     
-    print(f"Tempo totale di risposta: {response_time:.2f} secondi\n")
+    print(f"Tempo totale di risposta: {response_time:.2f} secondi, Tempo al primo carattere: {time_to_first_char:.2f} secondi\n")
