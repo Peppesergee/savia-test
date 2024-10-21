@@ -8,6 +8,10 @@ from transformers import (
     TextStreamer
 )
 
+model = None
+tokenizer = None
+
+# Classe per calcolare il tempo prima del primo carattere emesso
 class TimedTextStreamer(TextStreamer):
     def __init__(self, tokenizer):
         super().__init__(tokenizer)
@@ -18,6 +22,34 @@ class TimedTextStreamer(TextStreamer):
         if self.first_token_time is None:
             self.first_token_time = time.time()
         super().put(text)
+
+def initialize_model():
+    global model, tokenizer
+
+    if model is None or tokenizer is None:
+        print("Caricamento del modello...")
+        base_model = "swap-uniba/LLaMAntino-3-ANITA-8B-Inst-DPO-ITA"
+
+        bnb_config = BitsAndBytesConfig(
+            load_in_4bit=True, 
+            bnb_4bit_compute_dtype=torch.bfloat16,  
+        )
+   
+        model = AutoModelForCausalLM.from_pretrained(
+            base_model,
+            quantization_config=bnb_config,
+            device_map="auto",  # "auto" usa la GPU se disponibile
+            torch_dtype=torch.bfloat16,  
+        )
+
+        tokenizer = AutoTokenizer.from_pretrained(base_model)
+        print("Modello caricato correttamente.")
+    else:
+        print("Modello già caricato, utilizzo quello esistente.")
+
+sys = "Sei un assistente AI per la lingua Italiana di nome LLaMAntino-3 ANITA " \
+      "(Advanced Natural-based interaction for the ITAlian language)." \
+      " Rispondi nella lingua usata per la domanda in modo chiaro, semplice ed esaustivo."
 
 initialize_model()
 
@@ -42,7 +74,7 @@ while True:
     for k, v in inputs.items():
         inputs[k] = v.cuda()
 
-    # Utilizza il TimedTextStreamer per calcolare il tempo
+    # Utilizza il TimedTextStreamer per calcolare il tempo prima del primo carattere
     streamer = TimedTextStreamer(tokenizer)
 
     outputs = model.generate(
@@ -57,7 +89,7 @@ while True:
         streamer=streamer
     )
 
-    # Tempo di risposta effettivo
+    # Tempo di risposta effettivo fino al primo carattere
     first_char_time = streamer.first_token_time
     if first_char_time:
         time_to_first_char = first_char_time - start_time
