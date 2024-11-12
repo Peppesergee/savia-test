@@ -9,7 +9,7 @@ from transformers import (
 )
 
 model = None
-tokenizer = None
+tokenizer = None 
 
 # Classe per calcolare il tempo prima del primo carattere emesso
 class TimedTextStreamer(TextStreamer):
