@@ -39,6 +39,7 @@ def initialize_model():
     if cuda.device_count()>1:
         print(f"Using {cuda.device_count()} GPUs")
         model = torch.nn.DataParallel(model)
+        print(f"Model is using {len(model.device_ids)} GPUs: {model.device_ids}")
 
 sys = (
     "Sei un assistente AI per la lingua Italiana di nome LLaMAntino-3 ANITA "
