@@ -71,7 +71,7 @@ while True:
     inputs = tokenizer(prompt, return_tensors="pt", add_special_tokens=False).to('cuda')
 
     # Generazione ottimizzata: riduzione max_new_tokens e temperature più alta
-    outputs = model.generate(
+    outputs = model.module.generate(
         **inputs,
         max_new_tokens=3000,  # Limita la lunghezza generata
         temperature=0.7,  # Un po' più alta per generare più velocemente
