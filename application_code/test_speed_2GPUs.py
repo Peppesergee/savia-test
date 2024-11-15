@@ -36,6 +36,10 @@ def initialize_model():
     else:
         print("Modello già caricato, utilizzo quello esistente.")
 
+    if cuda.device_count()>1:
+        print(f"Using {cuda.device_count()} GPUs")
+        model = torch.nn.DataParallel(model)
+
 sys = (
     "Sei un assistente AI per la lingua Italiana di nome LLaMAntino-3 ANITA "
     "(Advanced Natural-based interaction for the ITAlian language). "
@@ -46,7 +50,6 @@ sys = (
 initialize_model()
 
 while True:
-    print(f"Number of available GPUs: {cuda.device_count()}")
     user_question = input("Inserisci la tua domanda (o digita 'esci' per uscire): ")
 
     if user_question.lower() == 'esci':
