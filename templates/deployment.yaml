@@ -16,7 +16,7 @@ spec:
       terminationMessagePolicy: File
       resources:
         limits:
-          nvidia.com/gpu: 2
+          nvidia.com/gpu: 1
           memory: 30Gi
           cpu: "16"
         requests:
