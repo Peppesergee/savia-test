@@ -1,0 +1,4 @@
+CUDA available: True
+num GPUs: 2
+loading tokenizer from: /AI4AL_LLMFT/checkpoints/Meta-Llama-3.1-8B/tokenizer
+loading dataset from json

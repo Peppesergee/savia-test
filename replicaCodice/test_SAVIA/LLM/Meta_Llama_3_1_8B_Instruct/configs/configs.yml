@@ -1,0 +1,16 @@
+version: 2.1
+model:
+  checkpoints_folder: "/checkpoints/"
+  model_name: "meta-llama/Meta-Llama-3.1-8B-Instruct"
+quantization:
+  load_in_4bit: False
+  load_in_8bit: False
+inference:
+  do_sample: False
+  num_beams: 1
+  temperature:
+  top_p: 
+  max_new_tokens: 3000
+  use_cache: True
+device:
+  device_name: "auto"

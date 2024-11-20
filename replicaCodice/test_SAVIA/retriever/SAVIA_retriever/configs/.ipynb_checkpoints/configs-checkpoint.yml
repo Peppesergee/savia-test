@@ -1,0 +1,31 @@
+version: 2.1
+models:
+  models_folder: "/AI4AL_LLMFT/checkpoints/"
+  embedding_model: "BAAI/bge-m3"
+  NER_model: "DeepMount00/GLiNER_ITA_LARGE"
+  reranking_model: "BAAI/bge-reranker-v2-m3"
+retrievers:
+  law_retriever:
+    wording:
+      top_m: 5
+      wording_threshold: 0.98
+    reranker:
+      use_reranking: True
+      top_n_BM25: 100
+      top_m_reranking: 100
+      reranking_threshold: 0.9
+      num_max_laws: 3
+    similarity:
+      top_m: 50
+      similarity_threshold: 0.72
+      num_max_laws: 3
+    articles:
+      top_m: 1000
+      articles_threshold: 0.6
+  attachments_retriever:
+    attachments_threshold: 0.98
+    num_max_atti_per_ente: 5
+    num_max_atti_assembela_legislativa: 5
+NER:
+  NER_threshold: 0.6
+verbose: True

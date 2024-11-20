@@ -1,0 +1,10 @@
+{
+    "atti_attuativi": ["atti attuativi", "provvedimenti attuativi", "documenti attuativi", "atti di attuazione"],
+    "atti_attuativi_GR": ["atti attuativi della Giunta Regionale", "atti attuativi della Giunta", "provvedimenti attuativi della Giunta Regionale", 
+                                        "documenti attuativi della Giunta Regionale", "atti di attuazione della Giunta Regionale"],
+    "atti_attuativi_AL": ["atti attuativi dell'Assemblea Legislativa", "provvedimenti attuativi dell'Assemblea Legislativa", 
+                        "documenti attuativi dell'Assemblea Legislativa", "atti di attuazione dell'Assemblea Legislativa"],
+    "lavori_preparatori": ["lavori preparatori"],
+    "analisi": ["valutazioni", "analisi", "schede tecniche", "relazioni", "relazioni tecniche", "indagini"],
+    "circolari": ["circolari"]
+}

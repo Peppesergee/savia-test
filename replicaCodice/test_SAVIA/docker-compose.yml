@@ -1,0 +1,76 @@
+version: "3.9"
+services:
+  python_client:
+    build:
+      context: ./python_client
+      dockerfile: Dockerfile
+    ports:
+      - "8897:8897"    #jupyter port
+    volumes:
+      - ./python_client:/python_client
+#    depends_on:
+#      llm:
+#        condition: service_started
+#      retriever:
+#        condition: service_started       
+  retriever:
+    build:
+      context: ./retriever
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"    #flask port
+    volumes:
+      - ./retriever:/retriever
+      - ./SAVIA_vector_stores:/SAVIA_vector_stores
+      - ./checkpoints:/checkpoints
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]              
+  llm:
+    env_file: ".env"
+    build:
+      context: ./LLM
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"    #flask port
+    volumes:
+      - ./LLM:/LLM
+      - ./checkpoints:/checkpoints
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+#  llm_small:
+#    env_file: ".env"
+#    build:
+#      context: ./LLM_small
+#      dockerfile: Dockerfile
+#    ports:
+#      - "5000:5000"    #flask port
+#    volumes:
+#      - ./LLM_small:/LLM_small
+#      - ./checkpoints:/checkpoints
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: all
+#              capabilities: [ gpu ]
+  mongo_db:
+    image: mongo:5.0.26
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      -  ./SAVIA_db/data/db:/data/db
+networks:
+  default:
+    name: savia_network

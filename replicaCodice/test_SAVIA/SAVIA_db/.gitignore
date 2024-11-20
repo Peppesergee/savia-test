@@ -1,0 +1,7 @@
+.ipynb_checkpoints
+!.gitkeep
+__pycache__/
+data/db/ 
+.zip
+data_old/
+data_backup/

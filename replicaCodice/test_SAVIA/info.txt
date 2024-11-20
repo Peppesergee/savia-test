@@ -1,0 +1,6 @@
+Per lanciare jupyter notebook su macchina remota:
+
+- fare tunnel SSH sulla porta di jupyter:
+    ssh -fN -L 8897:localhost:8897 "nome_server"
+- aprire la bash nel docker "python_client" con "open_python_client.sh"
+- lanciare il comando "open_jupyter.sh"
