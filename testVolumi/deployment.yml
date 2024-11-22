@@ -12,6 +12,16 @@ spec:
       volumeMounts:
       - mountPath: /python_client
         name: python-client
+      - mountPath: /checkpoints
+        name: checkpoints
+      - mountPath: /llm
+        name: llm
+      - mountPath: /retriever
+        name: retriever
+      - mountPath: /data/db
+        name: savia-db
+      - mountPath: /savia-vector-stores
+        name: savia-vector-stores
       name: savia-test-volume
       securityContext:
         privileged: true
@@ -29,6 +39,22 @@ spec:
   - name: python-client
     persistentVolumeClaim: 
       claimName: python-client
+  - name: checkpoints
+    persistentVolumeClaim: 
+      claimName: checkpoints
+  - name: llm
+    persistentVolumeClaim: 
+      claimName: llm
+  - name: retriever
+    persistentVolumeClaim: 
+      claimName: retriever
+  - name: savia-db
+    persistentVolumeClaim: 
+      claimName: savia-db
+  - name: savia-vector-stores
+    persistentVolumeClaim: 
+      claimName: savia-vector-stores
+  
   metadata:
     namespace: rer-savia
   runtimeClassName: nvidia
