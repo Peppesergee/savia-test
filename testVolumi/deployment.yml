@@ -9,7 +9,10 @@ spec:
       args: [" mkdir /rer_app; cd /rer_app/; git init; git remote add origin https://github.com/Peppesergee/savia-test.git;            git branch -M main; git pull origin main; cd /rer_venv; . bin/activate; pip install -r /rer_app/requirements.txt; while true; do echo ''; sleep 60; done"]
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/savia-test-repo:latest
       imagePullPolicy: IfNotPresent
-      name: savia-rer-sanita-laemur
+      volumeMounts:
+      - mountPath: /python_client
+        name: python-client
+      name: savia-test-volume
       securityContext:
         privileged: true
       terminationMessagePath: /dev/termination-log
@@ -22,7 +25,11 @@ spec:
         requests:
           memory: 8Gi
           cpu: "8"
+  volumes:
+  - name: python-client
+    persistentVolumeClaim: 
+      claimName: python-client
   metadata:
-    namespace: rer-sanita-laemur
+    namespace: rer-savia
   runtimeClassName: nvidia
  
