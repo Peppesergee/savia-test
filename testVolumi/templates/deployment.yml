@@ -28,6 +28,9 @@ spec:
       terminationMessagePath: /dev/termination-log
       terminationMessagePolicy: File
       resources:
+        limits:
+          memory: 30Gi
+          cpu: "16"
         requests:
           memory: 8Gi
           cpu: "8"
