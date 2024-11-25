@@ -16,7 +16,7 @@ spec:
         name: checkpoints
       - mountPath: /retriever
         name: retriever
-      - mountPath: /savia-vector-stores
+      - mountPath: /SAVIA_vector_stores
         name: savia-vector-stores
       name: savia-test-retriever
       securityContext:
