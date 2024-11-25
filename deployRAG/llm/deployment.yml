@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
     - command: ["/bin/sh","-c"]
-      args: ["python flask_client.py"]
+      args: ["sleep infinity"]
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm:latest
       imagePullPolicy: IfNotPresent
       ports:
