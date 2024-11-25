@@ -19,6 +19,7 @@ spec:
         privileged: true
       terminationMessagePath: /dev/termination-log
       terminationMessagePolicy: File
+      hostname: mongo_db
       resources:
         limits:
           memory: 30Gi
