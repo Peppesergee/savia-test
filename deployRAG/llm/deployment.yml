@@ -10,7 +10,7 @@ spec:
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm:latest
       envFrom:
       - configMapRef:         
-          name: HF_auth_token
+          name: hf-auth-token
       imagePullPolicy: IfNotPresent
       ports:
         - containerPort: 5000
