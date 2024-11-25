@@ -10,7 +10,7 @@ spec:
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_python_client:latest
       imagePullPolicy: IfNotPresent
       ports:
-        - containerPort: "8897"
+        - containerPort: 8897
       volumeMounts:
       - mountPath: /python_client
         name: python-client
