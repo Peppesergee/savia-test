@@ -6,7 +6,9 @@ metadata:
 spec:
   containers:
     - command: ["/bin/sh","-c"]
-      args: ["python flask_client.py"]
+      args: ["echo 'mongo_db mongo-db' > /etc/host.aliases",
+        "export HOSTALIASES=/etc/host.aliases",
+        "python flask_client.py"]
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_retriever:latest
       imagePullPolicy: IfNotPresent
       ports:
