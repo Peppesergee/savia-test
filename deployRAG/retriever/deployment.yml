@@ -10,7 +10,7 @@ spec:
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_retriever:latest
       imagePullPolicy: IfNotPresent
       ports:
-        - containerPort: "5001"
+        - containerPort: 5001
       volumeMounts:
       - mountPath: /checkpoints
         name: checkpoints
