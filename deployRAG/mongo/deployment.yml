@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
     - command: ["/bin/sh","-c"]
-      args: ["docker-entrypoint.sh"]
+      args: ["sleep infinity"]
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/mongo@sha256:3ea7d664f412adb827f78bfa7a06a7a6f7440daee313e9eb0d397184c356fe8b
       imagePullPolicy: IfNotPresent
       ports:
