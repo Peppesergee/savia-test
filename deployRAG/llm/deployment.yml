@@ -14,7 +14,7 @@ spec:
       volumeMounts:
       - mountPath: /checkpoints
         name: checkpoints
-      - mountPath: /llm
+      - mountPath: /LLM
         name: llm
       name: savia-test-llm
       securityContext:
