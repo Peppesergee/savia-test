@@ -7,7 +7,8 @@ spec:
   containers:
     - command: ["/bin/sh","-c"]
       args: ["python flask_client.py"]
-      image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm:latest
+#      image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm:latest
+      image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm_small:latest
       envFrom:
       - configMapRef:         
           name: hf-auth-token
@@ -19,6 +20,8 @@ spec:
         name: checkpoints
       - mountPath: /LLM
         name: llm
+      - mountPath: /LLM_small
+        name: llmsmall
       name: savia-test-llm
       securityContext:
         privileged: true
@@ -39,6 +42,9 @@ spec:
   - name: llm
     persistentVolumeClaim: 
       claimName: llm
+  - name: llmsmall
+    persistentVolumeClaim: 
+      claimName: llmsmall
   metadata:
     namespace: rer-savia
   runtimeClassName: nvidia
