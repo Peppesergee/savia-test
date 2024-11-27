@@ -7,8 +7,8 @@ spec:
   containers:
     - command: ["/bin/sh","-c"]
       args: 
-      -  python flask_client.py
-         apt-get -y install vim
+      -  apt-get -y install vim
+         python flask_client.py
 #      image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm:latest
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm_small:latest
       envFrom:
