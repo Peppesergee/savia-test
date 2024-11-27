@@ -23,7 +23,7 @@ spec:
       - mountPath: /savia-vector-stores
         name: savia-vector-stores
       - mountPath: /LLM_small
-        name: LLM_small
+        name: llmsmall
       name: savia-test-volume
       securityContext:
         privileged: true
