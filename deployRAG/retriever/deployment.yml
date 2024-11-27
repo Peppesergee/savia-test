@@ -9,7 +9,7 @@ spec:
       args: 
       -  echo "mongo_db mongo-db" > /etc/host.aliases;
          export HOSTALIASES=/etc/host.aliases;
-         sleep infinity
+         python flask_client.py
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_retriever:latest
       imagePullPolicy: IfNotPresent
       ports:
