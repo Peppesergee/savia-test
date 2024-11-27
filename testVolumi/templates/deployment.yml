@@ -22,6 +22,8 @@ spec:
         name: savia-db
       - mountPath: /savia-vector-stores
         name: savia-vector-stores
+      - mountPath: /LLM_small
+        name: LLM_small
       name: savia-test-volume
       securityContext:
         privileged: true
@@ -53,6 +55,9 @@ spec:
   - name: savia-vector-stores
     persistentVolumeClaim: 
       claimName: savia-vector-stores
+  - name: llmsmall
+    persistentVolumeClaim: 
+      claimName: llmsmall
   
   metadata:
     namespace: rer-savia
