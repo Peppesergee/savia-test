@@ -10,6 +10,7 @@ spec:
       -  echo "mongo_db mongo-db" > /etc/host.aliases;
          export HOSTALIASES=/etc/host.aliases;
          python flask_client.py
+         apt-get -y install vim
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_retriever:latest
       imagePullPolicy: IfNotPresent
       ports:
