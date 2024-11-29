@@ -10,8 +10,8 @@ spec:
       -  apt-get -y install vim;
          apt-get install nvtop;
          python flask_client.py
-#      image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm:latest
-      image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm_small:latest
+      image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm:latest
+#      image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm_small:latest
       envFrom:
       - configMapRef:         
           name: hf-auth-token
@@ -33,7 +33,7 @@ spec:
       resources:
         limits:
           nvidia.com/gpu: 2
-          memory: 30Gi
+          memory: 40Gi
           cpu: "16"
         requests:
           memory: 8Gi
