@@ -9,7 +9,7 @@ spec:
       args: 
       -  apt-get update;
          apt-get -y install vim;
-#         apt-get install nvtop;
+         apt-get install nvtop;
          sleep infinity
       image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm:latest
 #      image: harbor-core.prod.margherita.ad.lepida.it/savia-test/test_savia_llm_small:latest
